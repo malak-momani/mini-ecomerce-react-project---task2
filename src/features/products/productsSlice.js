@@ -59,6 +59,7 @@ const productsSlice = createSlice({
             .addCase(fetchProductById.fulfilled, (state, action) => {
                 state.currentStatus = 'success';
                 state.currentProduct = action.payload;
+                console.log(action.payload)
             })
             .addCase(fetchProductById.rejected, (state, action) => {
                 state.currentStatus = 'failed';

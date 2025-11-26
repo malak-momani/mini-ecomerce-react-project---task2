@@ -2,17 +2,16 @@ import { Row } from "react-bootstrap"
 import ProductsList from "../../components/ProductsList/ProductList";
 import { useSelector } from "react-redux";
 import "./Home.css"
+import Header from '../../components/Header/Header';
 
 const Home = () => {
 
-    const { items, status, error } = useSelector(state => state.products);
-    console.log({ items })
+    const { items } = useSelector(state => state.products);
 
 
-    if (status === 'loading') return <div>Loading products...</div>;
-    if (status === 'failed') return <div>Error: {error}</div>;
     return (
         <>
+            <Header />
             <Row className="p-5">
                 <h2 className="our-products">Our Products</h2>
             </Row>

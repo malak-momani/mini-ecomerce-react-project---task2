@@ -1,12 +1,16 @@
-import { Button, Form } from "react-bootstrap";
+import { Badge, Button, Form } from "react-bootstrap";
 import { Navbar } from "react-bootstrap";
 import logo from '../../logo.svg';
 import cart from "../../assets/images/cart3.svg";
 import Nav from 'react-bootstrap/Nav';
+import { useSelector } from "react-redux";
 
 function MyNavbar() {
+    const { totalItems } = useSelector(state => state.cart) || 0
+
+    console.log({ totalItems })
     return (
-        <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary overflow-hidden">
+        <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary overflow-hidden sticky-top">
             <Navbar.Brand href="#home">
                 <img
                     src={logo}
@@ -17,8 +21,8 @@ function MyNavbar() {
             </Navbar.Brand>
             <Navbar.Collapse id="responsive-navbar-nav" className="d-flex justify-content-center">
                 <Nav className="me-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>
-                    <Nav.Link href="#products">Products</Nav.Link>
+                    <Nav.Link href="/">Home</Nav.Link>
+                    <Nav.Link href="/products">Products</Nav.Link>
                 </Nav>
                 <div className="d-flex align-items-center ms-auto flex-wrap">
                     <Form className="d-flex me-3">
@@ -32,10 +36,21 @@ function MyNavbar() {
                     </Form>
                 </div>
                 <Nav>
-                    <Nav.Link href="#cart">
+                    <Nav.Link href="/cart">
                         <img src={cart} alt="cart" />
+                        {totalItems ? (
+                            <Badge
+                                bg="danger"
+                                pill
+                                className="top-0 start-100 translate-middle"
+                            >
+                                {totalItems}
+                            </Badge>
+                        ) :
+                            (null)}
+
                     </Nav.Link>
-                    <Nav.Link eventKey={2} href="#profile">
+                    <Nav.Link eventKey={2} href="/profile">
                         Profile
                     </Nav.Link>
                 </Nav>

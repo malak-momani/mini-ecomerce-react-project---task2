@@ -7,24 +7,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import store from './app/store';
 
-const saveCartToLocalStorage = (state) => {
-  try {
-    const toSave = JSON.stringify(state.cart);
-    localStorage.setItem('cart', toSave)
-  } catch (error) {
-    console.log('Could not save cart', error)
-
-  }
-  // MAKE IT AS STATE
-  let currentCart;
-  store.subscribe(() => {
-    const prev = currentCart;
-    currentCart = store.getState().cart;
-    if (prev !== currentCart) {
-      saveCartToLocalStorage(currentCart)
-    }
-  })
-}
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

@@ -1,15 +1,32 @@
 import { Button, Card, Col, Row } from "react-bootstrap";
-import cart from "../../assets/images/cart3.svg"
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../features/cart/cartSlice";
+import { saveCartToLocalStorage } from "../../localStorage/helpers";
+import cartIcon from '../../assets/images/cart3.svg'
+import { useEffect } from "react";
 
 const ProductItem = ({ item }) => {
 
+    const cart = useSelector(state => state.cart)
     const dispatch = useDispatch();
 
-    const handleAdd = (product) => {
-
+    const handleAdd = () => {
+        dispatch(addToCart({
+            productId: item?.id,
+            title: item?.title,
+            brand: item?.brand,
+            price: item?.price,
+            img: item?.thumbnail,
+            description: item?.description,
+            discount: item?.discountPercentage,
+            quantity: 1,
+        }))
     }
+
+    useEffect(() => {
+        saveCartToLocalStorage(cart);
+    }, [cart]);
+
     return (
         <Card style={{ width: '20rem', height: '20rem' }}>
             <Card.Img variant="top" src={item?.thumbnail} className="w-50 mx-auto" />
@@ -22,24 +39,21 @@ const ProductItem = ({ item }) => {
                         </Card.Text>
                     </Col>
                     <Col>
-                        <Card.Text style={{ color: "gray" }}>
+                        <Card.Link style={{ color: "gray", cursor: 'pointer' }} href={`/product/${item.id}`}>
                             {`Details >`}
-                        </Card.Text>
+                        </Card.Link>
                     </Col>
                 </Row>
-
-
 
                 {/* <Button variant="primary" className="w-50">Details</Button> */}
                 <Card.Text className="d-flex justify-content-between">
                     {`${item?.price}$`}
-                    <Button variant="primary" className="w-25 cart" >
-                        <img src={cart} alt="cart" />
+                    <Button variant="outline-secondary" className="w-50 cart" onClick={handleAdd} >
+                        Add to cart
+                        <img src={cartIcon} alt="cart" style={{ margin: 5 }} />
                     </Button>
                 </Card.Text>
-                <Row className="d-flex justify-content-between px-2">
 
-                </Row>
 
             </Card.Body>
         </Card >

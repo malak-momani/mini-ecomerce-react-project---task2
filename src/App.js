@@ -1,13 +1,19 @@
 import './App.css';
-import Header from './components/Header/Header';
 import { BrowserRouter } from 'react-router';
 import AppRouter from './router/MyRouter';
 import MyNavbar from './components/Navbar/Navbar';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { saveCartToLocalStorage } from './localStorage/helpers';
 function App() {
+  const cartState = useSelector(state => state.cart)
+
+  useEffect(() => {
+    saveCartToLocalStorage(cartState);
+  }, [])
   return (
     <BrowserRouter>
       <MyNavbar />
-      <Header />
       <div>
         <AppRouter />
       </div>

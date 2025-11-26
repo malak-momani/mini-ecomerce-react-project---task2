@@ -8,7 +8,7 @@ const productsApi = {
 
     async fetchProductById(id) {
         const res = await axios.get(`https://dummyjson.com/products/${id}`);
-        return res?.data?.products;
+        return res?.data;
     }
 }
 
