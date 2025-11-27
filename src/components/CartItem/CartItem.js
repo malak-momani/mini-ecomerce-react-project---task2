@@ -23,15 +23,15 @@ function CartItem({ item }) {
         dispatch(removeFromCart(item.productId))
     }
     return (
-        <Card className='w-75 p-2'>
+        <Card className='p-2 cart-item'>
             <Row className='d-flex flex-row'>
                 <Card.Header>
-                    <img src={shop} className='shop' />
+                    <img src={shop} className='shop' alt='shop' />
                     {item?.brand}
                 </Card.Header>
             </Row>
             <Row className='align-items-center'>
-                <Col className='col-2'>
+                <Col className='col-2 cart-img'>
                     <Card.Img
                         src={item.img}
                         className='border border-gray'
@@ -70,7 +70,7 @@ function CartItem({ item }) {
                             size="sm"
                             onClick={() => handleDelete(item.id)}
                         >
-                            <img src={trash} />
+                            <img src={trash} alt='trash' />
                         </Button>
                     </div>
 

@@ -3,3 +3,18 @@
     height: 25px;
     margin-right: 10px;
 }
+
+.cart-item {
+    width: 75%;
+}
+
+
+@media (max-width: 730px) {
+    .cart-item {
+        width: 100%
+    }
+
+    .cart-img {
+        display: flex;
+    }
+}

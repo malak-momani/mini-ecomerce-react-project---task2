@@ -10,7 +10,8 @@ function App() {
 
   useEffect(() => {
     saveCartToLocalStorage(cartState);
-  }, [])
+  }, [cartState])
+
   return (
     <BrowserRouter>
       <MyNavbar />

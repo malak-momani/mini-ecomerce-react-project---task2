@@ -37,7 +37,7 @@ const ProductDetails = () => {
     useEffect(() => {
         dispatch(fetchProductById(id));
         setQuantity(1)
-    }, []);
+    }, [dispatch, id]);
 
     useEffect(() => {
         saveCartToLocalStorage(cart);
