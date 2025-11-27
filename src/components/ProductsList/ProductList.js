@@ -2,7 +2,6 @@ import { Col, Container, Row } from "react-bootstrap";
 import ProductItem from "../ProductItem/ProductItem";
 
 const ProductsList = ({ products }) => {
-    console.log({ products })
 
     return (
         <Container className="px-5">

@@ -1,7 +1,7 @@
 const saveCartToLocalStorage = (cartState) => {
     try {
-        const toSave = cartState ? JSON.stringify(cartState) : { items: [], lastUpdated: null, totalItems: 0 };
-        localStorage.setItem('cart', toSave)
+        const toSave = cartState ? cartState : { items: [], lastUpdated: null, totalItems: 0 };
+        localStorage.setItem('cart', JSON.stringify(toSave))
     } catch (error) {
         console.log('Could not save cart', error)
 
@@ -10,12 +10,23 @@ const saveCartToLocalStorage = (cartState) => {
 
 const loadCartFromLocalStorage = () => {
     try {
-        const cart = localStorage.getItem('cart');
-        return JSON.parse(cart);
-    } catch (error) {
-        console.log('Could Not read from Local Storage', error);
-        return { items: [], lastUpdated: null, totalItems: 0 }
+        const data = localStorage.getItem("cart");
+        if (!data) return undefined;
+
+        const parsed = JSON.parse(data);
+        if (
+            typeof parsed === "object" &&
+            parsed !== null &&
+            Array.isArray(parsed.items)
+        ) {
+            return parsed;
+        }
+
+        return undefined;
+    } catch {
+        return undefined;
     }
+
 }
 
 

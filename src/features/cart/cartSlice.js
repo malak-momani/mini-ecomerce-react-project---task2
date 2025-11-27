@@ -1,7 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loadCartFromLocalStorage, saveCartToLocalStorage } from "../../localStorage/helpers";
 
-const initialState = loadCartFromLocalStorage();
+const initialState = loadCartFromLocalStorage() || {
+    items: [],
+    totalItems: 0,
+    lastUpdated: null,
+};
 const findItemIndex = (items, productId) => items.findIndex(i => i.productId === productId);
 
 

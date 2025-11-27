@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 function MyNavbar() {
     const { totalItems } = useSelector(state => state.cart) || 0
 
-    console.log({ totalItems })
     return (
         <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary overflow-hidden sticky-top">
             <Navbar.Brand href="#home">
